@@ -63,5 +63,15 @@ public class EmployeeResource {
         return GSON.toJson(employeeDTO);
     }
 
+    @PUT
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public String editEmployee (String emp) {
+        EmployeeDTO employeeDTO = GSON.fromJson(emp, EmployeeDTO.class);
+        EmployeeDTO editEmployee = EMPLOYEE_FACADE.editEmp(employeeDTO);
+
+        return GSON.toJson(editEmployee);
+    }
+
 
 }

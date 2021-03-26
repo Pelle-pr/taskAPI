@@ -119,6 +119,24 @@ public class EmployeeFacade {
         return employeeDTOS;
     }
 
+    public EmployeeDTO editEmp (EmployeeDTO emp) {
+        EntityManager em = emf.createEntityManager();
+
+        Employee employee = em.find(Employee.class, emp.getId());
+        employee.setName(emp.getName());
+        employee.setPhone(emp.getPhone());
+        employee.setEmail(emp.getEmail());
+
+        try {
+            em.getTransaction().begin();
+            em.persist(employee);
+            em.getTransaction().commit();
+            return new EmployeeDTO(employee);
+        }finally {
+            em.close();
+        }
+    }
+
     private void checkIfEmailIsInUse(EmployeeDTO dto, EntityManager em) throws MissingInput {
 
         TypedQuery<Employee> employeeTypedQuery = em.createQuery("SELECT e from Employee e where e.email = :email", Employee.class);
@@ -130,5 +148,7 @@ public class EmployeeFacade {
             throw new MissingInput("That email is already in use!");
         }
     }
+
+
 
 }
