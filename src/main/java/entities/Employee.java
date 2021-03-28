@@ -19,7 +19,7 @@ public class Employee implements Serializable {
 
     private int phone;
 
-    @ManyToMany(mappedBy = "employeeList")
+    @ManyToMany(mappedBy = "employeeList", cascade = CascadeType.ALL)
     private List<Task> taskList;
 
     public Employee() {
