@@ -21,7 +21,7 @@ public class Customer implements Serializable {
 
     private String email;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Task> taskList;
 
     public Customer() {

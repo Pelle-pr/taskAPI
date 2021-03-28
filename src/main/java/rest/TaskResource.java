@@ -25,7 +25,14 @@ public class TaskResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static final TaskFacade TASK_FACADE = TaskFacade.getTaskFacade(EMF);
 
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getTaskByCid(@PathParam("id") int id) throws MissingInput {
+        List<TaskDTO> taskDTOS = TASK_FACADE.getTasksByCid(id);
 
+        return GSON.toJson(taskDTOS);
+    }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -37,12 +44,4 @@ public class TaskResource {
         return GSON.toJson(taskAdded);
     }
 
-    @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getTaskByCid(@PathParam("id") int id) throws MissingInput {
-        List<TaskDTO> taskDTOS = TASK_FACADE.getTasksByCid(id);
-
-        return GSON.toJson(taskDTOS);
-    }
 }

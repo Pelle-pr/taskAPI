@@ -24,8 +24,6 @@ public class EmployeeResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static final EmployeeFacade EMPLOYEE_FACADE = EmployeeFacade.getEmployeeFacade(EMF);
 
-
-
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
